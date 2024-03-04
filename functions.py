@@ -7,7 +7,10 @@ class FileManager:
         self.current_directory = WORKING_DIRECTORY
 
     def is_within_working_dir(self, path):
-        return os.path.abspath(path).startswith(WORKING_DIRECTORY)
+        normalized_path = os.path.realpath(path)
+        normalized_working_dir = os.path.realpath(WORKING_DIRECTORY)
+        return normalized_path.startswith(normalized_working_dir)
+
 
     def create_folder(self, name):
         path = os.path.join(self.current_directory, name)
